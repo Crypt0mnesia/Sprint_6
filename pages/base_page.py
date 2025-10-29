@@ -1,6 +1,5 @@
 import allure
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
 
 class BasePage:
     def __init__(self, driver, wait, url):
@@ -8,25 +7,49 @@ class BasePage:
         self.wait = wait
         self.url = url
 
+    @allure.step('Ожидаем кликабельность элемента')
+    def wait_until_clickable(self, locator):
+        return self.wait.until(EC.element_to_be_clickable(locator))
+
+    @allure.step('Ожидаем видимость элемента')
+    def wait_until_visible(self, locator):
+        return self.wait.until(EC.visibility_of_element_located(locator))
+
     @allure.step('Открываем страницу и ожидаем ее загрузки')
     def open(self):
         self.driver.get(self.url)
-        self.wait.until(EC.url_contains(self.url))
+        self.wait.until(EC.url_to_be(self.url))
+
+    @allure.step('Получаем текущий URL')
+    def get_current_url(self):
+        return self.driver.current_url
 
     @allure.step('Находим элемент и кликаем')
     def click(self, locator):
-        element = self.wait.until(EC.element_to_be_clickable(locator))
+        element = self.wait_until_clickable(locator)
+        element.click()
+
+    @allure.step('Скролл к элементу')
+    def scroll_to_element(self, locator):
+        element = self.wait_until_visible(locator)
+        self.driver.execute_script("arguments[0].scrollIntoView(true);", element)
+        return element
+
+    @allure.step('Скролл к элементу и клик')
+    def scroll_and_click(self, locator):
+        element = self.scroll_to_element(locator)
         element.click()
 
     @allure.step('Вводим текст в поле')
     def set_value(self, locator, value):
-        element = self.wait.until(EC.visibility_of_element_located(locator))
+        element = self.wait_until_visible(locator)
         element.clear()
         element.send_keys(value)
 
     @allure.step('Получаем текст элемента')
     def get_text(self, locator):
-        return self.wait.until(EC.visibility_of_element_located(locator))
+        element = self.wait_until_visible(locator)
+        return element.text
 
     @allure.step('Проверяем видимость элемента')
     def is_visible(self, locator):
@@ -36,32 +59,24 @@ class BasePage:
         except:
             return False
 
-    @allure.step('Получаем текущий URL')
-    def get_current_url(self):
-        return self.driver.current_url
-
-    @allure.step('Закрываем текущую вкладку')
-    def close_current_tab(self):
-        self.driver.close()
-
-    @allure.step('Переключаемся на вкладку по индексу')
-    def switch_to_tab(self, tab_index):
-        tabs = self.driver.window_handles
-        if tab_index < len(tabs):
-            self.driver.switch_to.window(tabs[tab_index])
-
     @allure.step('Получаем количество открытых вкладок')
     def get_tabs_count(self):
         return len(self.driver.window_handles)
 
-    @allure.step('Обновляем страницу')
-    def refresh_page(self):
-        self.driver.refresh()
+    @allure.step('Ожидаем количество вкладок: {number}')
+    def wait_for_number_of_windows(self, number):
+        return self.wait.until(EC.number_of_windows_to_be(number))
 
-    @allure.step('Возвращаемся на предыдущую страницу')
-    def go_back(self):
-        self.driver.back()
+    @allure.step('Ожидаем что URL содержит: {text}')
+    def wait_until_url_contains(self, text):
+        return self.wait.until(EC.url_contains(text))
 
-    @allure.step('Переходим на следующую страницу')
-    def go_forward(self):
-        self.driver.forward()
+    @allure.step('Переключаемся на последнюю вкладку')
+    def switch_to_last_tab(self):
+        tabs = self.driver.window_handles
+        self.driver.switch_to.window(tabs[-1])
+
+    @allure.step('Клик по элементу через JavaScript')
+    def click_via_js(self, locator):
+        element = self.wait_until_visible(locator)
+        self.driver.execute_script("arguments[0].click();", element)

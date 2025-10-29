@@ -1,5 +1,5 @@
 class Settings:
-    DEFAULT_TIMEOUT = 30
+    DEFAULT_TIMEOUT = 15
 
 class TestData():
     METRO_STATIONS = [

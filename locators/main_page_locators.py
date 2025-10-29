@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 
 class MainPageLocators:
 
-    BOTTOM_ORDER_BUTTON = [By.CSS_SELECTOR, ".Home_FinishButton__1_cWm > .Button_Middle__1CSJM"]
+    BOTTOM_ORDER_BUTTON = (By.CSS_SELECTOR, ".Home_FinishButton__1_cWm > .Button_Middle__1CSJM")
 
     QUESTION_1 = (By.ID, "accordion__heading-0")
     QUESTION_2 = (By.ID, "accordion__heading-1")
