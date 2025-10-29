@@ -12,6 +12,7 @@
 **Тестовый стенд:** https://qa-scooter.praktikum-services.ru
 
 ### Директории и файлы:
+- **`allure-report/`** — содержит сгенерированный Allure-отчет (HTML-версия)
 - **`images/`** — содержит скриншоты Allure-отчетов и результатов тестирования
   - `allure_overview.png` — общая статистика тестов
   - `faq_question_1_cost.png` — пример теста вопросов
@@ -92,16 +93,20 @@ Faker - генерация реалистичных тестовых данны�
 
 ##  Результаты тестирования
 
-### Общий отчет Allure
+### Полный Allure отчет
+
+**Детальный отчет со всеми тестами, шагами и графиками доступен в папке [allure-report/](allure-report/index.html)**
+
+**Общий отчет Allure**
 ![Allure Overview](images/allure_overview.png)
 
-### Пример теста вопросов
+**Пример теста вопросов**
 ![FAQ Test](images/faq_question_1_cost.png)
 
-### Процесс заказа
+**Процесс заказа**
 ![Order Flow](images/order_flow_top.png)
 
-### Навигация по логотипам
+**Навигация по логотипам**
 ![Navigation_logo](images/navigation_yandex_logo.png)
 
 ## Контакты
