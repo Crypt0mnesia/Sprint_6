@@ -88,16 +88,16 @@ Faker - генерация реалистичных тестовых данны�
 ##  Результаты тестирования
 
 ### Общий отчет Allure
-![Allure Overview](allure_overview.png)
+![Allure Overview](images/allure_overview.png)
 
 ### Пример теста вопросов
-![FAQ Test](faq_question_1_cost.png)
+![FAQ Test](images/faq_question_1_cost.png)
 
 ### Процесс заказа
-![Order Flow](order_flow_top.png)
+![Order Flow](images/order_flow_top.png)
 
 ### Навигация по логотипам
-![Navigation_logo](navigation_yandex_logo.png)
+![Navigation_logo](images/navigation_yandex_logo.png)
 
 ## Контакты
 **Автор:** Olga Pesotskaya
