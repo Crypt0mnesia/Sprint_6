@@ -78,3 +78,7 @@ class OrderPage(BasePage):
     @allure.step('Перейти к статусу заказа')
     def go_to_order_status(self):
         self.click(OrderPageLocators.STATUS_BUTTON)
+
+    @allure.step('Проверить, что открыта страница заказа')
+    def should_be_order_page(self):
+        self.url_should_contain(ORDER_PAGE_URL)

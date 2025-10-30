@@ -71,6 +71,10 @@ class BasePage:
     def wait_until_url_contains(self, text):
         return self.wait.until(EC.url_contains(text))
 
+    @allure.step('Проверить что URL содержит {expected_url}')
+    def url_should_contain(self, expected_url):
+        assert expected_url in self.driver.current_url
+
     @allure.step('Переключаемся на последнюю вкладку')
     def switch_to_last_tab(self):
         tabs = self.driver.window_handles

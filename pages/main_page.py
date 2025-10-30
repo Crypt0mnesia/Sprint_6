@@ -31,3 +31,7 @@ class MainPage(BasePage):
     @allure.step('Клик по логотипу Самокат')
     def click_scooter_logo(self):
         self.click(BasePageLocators.SCOOTER_LOGO)
+
+    @allure.step('Проверить, что открыта главная страница')
+    def should_be_main_page(self):
+        self.url_should_contain(MAIN_PAGE_URL)

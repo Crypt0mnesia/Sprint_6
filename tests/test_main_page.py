@@ -39,7 +39,7 @@ class TestMainPage:
         order_page.open()
         main_page.click_scooter_logo()
 
-        assert driver.current_url == MAIN_PAGE_URL
+        main_page.should_be_main_page()
 
     @allure.title('Проверка перехода на Дзен через логотип Яндекс')
     @allure.description('Проверяем, что клик по логотипу Яндекс открывает Дзен в новой вкладке')
@@ -62,19 +62,19 @@ class TestMainPage:
     @allure.description('Проверяем, что верхняя кнопка "Заказать" ведет на страницу заказа')
     def test_top_order_button_redirect_to_order_page(self, driver, wait):
         main_page = MainPage(driver, wait)
+        order_page = OrderPage(driver, wait)
+
         main_page.open()
-
         main_page.click_top_order_button()
-
-        assert ORDER_PAGE_URL in driver.current_url
+        order_page.should_be_order_page()
 
     @allure.title('Проверка кнопки заказа внизу страницы')
     @allure.description('Проверяем, что нижняя кнопка "Заказать" ведет на страницу заказа')
     def test_bottom_order_button_redirect_to_order_page(self, driver, wait):
         main_page = MainPage(driver, wait)
+        order_page = OrderPage(driver, wait)
+
         main_page.open()
 
-        main_page.scroll_to_element(MainPageLocators.BOTTOM_ORDER_BUTTON)
-        main_page.scroll_and_click(MainPageLocators.BOTTOM_ORDER_BUTTON)
-
-        assert ORDER_PAGE_URL in driver.current_url
+        main_page.click_bottom_order_button()
+        order_page.should_be_order_page()

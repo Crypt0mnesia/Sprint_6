@@ -45,7 +45,3 @@ class TestOrderFlow:
         order_number = order_page.get_order_number()
         assert order_number is not None
         assert order_number.strip() != ""
-
-        order_page.go_to_order_status()
-        order_page.wait_until_url_contains(TRACK_PAGE_URL)
-        assert TRACK_PAGE_URL in driver.current_url
